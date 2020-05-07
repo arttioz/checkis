@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('isdata', "ISController@testConnection");
+Route::get('checkData/{month}/{year}', "ISController@checkData");
+
