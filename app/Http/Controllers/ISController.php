@@ -23,8 +23,9 @@ class ISController extends Controller
     }
 
     public static  function runCheckData($month ,$year, $hospCode = ""){
+    set_time_limit(1000);
 
-        $isData = ISOnline::whereMonth("lastupdate",$month)->whereYear("lastupdate",$year)->limit("10")->get();
+        $isData = ISOnline::whereMonth("lastupdate",$month)->whereYear("lastupdate",$year)->get();
         foreach ($isData as $row){
             self::checkISData($row);
         }
@@ -33,7 +34,7 @@ class ISController extends Controller
     public static  function checkISData(ISOnline $row){
 
        if (self::checkFrontNameWithSex($row)){
-           echo $row->id . " : error  checkFrontNameWithSex <br>";
+           echo $row->id . " ". $row->prename. " ". $row->sex. " : error  checkFrontNameWithSex <br>";
        }
         if (self::checkDriverAge($row)){
             echo $row->id . " : error  checkDriverAge <br>";
@@ -43,11 +44,34 @@ class ISController extends Controller
 
     public static function checkFrontNameWithSex(ISOnline $row){
 
-       return true;
+        $maleFrontName = ['นาย','ด.ช.' , 'Mr.' , 'พระ'];
+        $male_sex = 1;
+
+        $femaleFrontName = ['นาง','น.ส.','ด.ญ.' ,'นส.' , 'ดญ.' ,'พันตรีหญิง'];
+        $female_sex = 2;
+
+        $prename = $row->prename;
+        $sex = $row->sex;
+
+        if($sex == $female_sex){
+            if (!in_array($prename,$femaleFrontName)){
+                return true;
+            }else{
+                return false;
+            }
+
+        }else{
+            if (!in_array($prename,$maleFrontName)){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
     }
 
     public static function checkDriverAge(ISOnline $row){
 
-        return true;
+        return false;
     }
 }
