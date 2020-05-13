@@ -55,8 +55,13 @@ class ISController extends Controller
         }
 
         //  ตรวจสอบ คำหน้าหน้า อาชีพเป็น หทาย ตำรวจ แต่ อาชีพไม่ใช้หทาย ตำรวจ
-        if (self::checkFrontNameWithJob($row)){
+        if (self::checkSoldierPolishFrontNameWithJob($row)){
             echo $row->id . " ". $row->prename. " ". $row->sex. " : error คำหน้าหน้า อาชีพเป็น หทาย ตำรวจ แต่ อาชีพไม่ใช้หทาย ตำรวจ <br>";
+        }
+
+        //   ตรวจสอบ คำหน้าหน้า พระภิกษุ สามเณร แม่ชี อาชีพรหัส11
+        if (self::checkMonkFrontNameWithJob($row)){
+            echo $row->id . " ". $row->prename. " ". $row->sex. " : error  คำหน้าหน้า พระภิกษุ สามเณร แม่ชี อาชีพรหัส 11 <br>";
         }
 
     }
@@ -68,7 +73,7 @@ class ISController extends Controller
         $maleFrontName = ['นาย','ด.ช.' , 'Mr' , 'พระ'];
         $male_sex = 1;
 
-        $femaleFrontName = [ 'Ms','Mrs','นาง','น.ส.','ด.ญ.' ,'นส.' , 'ดญ.' ,'หญิง', "แม่"];
+        $femaleFrontName = [ 'Ms','rs','นาง','น.ส.','ด.ญ.' ,'นส.' , 'ดญ.' ,'หญิง', "แม่"];
         $female_sex = 2;
 
         $prename = $row->prename;
@@ -95,39 +100,68 @@ class ISController extends Controller
         return false;
     }
 
-    public static function isContainArray($check, $arrayWord){
-
-        foreach ($arrayWord as $word){
-            if (strpos(strtolower($word) , strtolower($check) ) !== false) {
-               return true;
-            }
-        }
-        return false;
-    }
 
     // ตรวจสอบ คำหน้าหน้า อาชีพเป็น หทาย ตำรวจ แต่ อาชีพไม่ใช้หทาย ตำรวจ
-    public static function checkFrontNameWithJob(ISOnline $row){
+    public static function checkSoldierPolishFrontNameWithJob(ISOnline $row){
 
-        $polish_soilder_prename = ['พล','ส.อ.' , 'ร.ท.' , 'เรือ' , 'ตำรวจ', "สิบ","ร้อย" , "พัน"];
-        $occuCheck = 2;
+        $check_prename = ['พล','ส.อ.' , 'ร.ท.' , 'เรือ' , 'ตำรวจ', "สิบ","ร้อย" , "พัน"];
+        $check_occu = 2;
 
         $prename = $row->prename;
         $OCCU = (int) $row->OCCU;
 
-        foreach ($polish_soilder_prename as $checkPrename){
+        foreach ($check_prename as $checkPrename){
             if (strpos($checkPrename, $prename) !== false) {
-                if($OCCU != $occuCheck){
+                if($OCCU != $check_occu){
                     // คำหน้าหน้า อาชีพเป็น หทาย แต่ อาชีพไม่ใช้ทหาร
                     return true;
                 }
             }
         }
+
         return false;
 
     }
+
+
+    // ตรวจสอบ คำหน้าหน้า พระภิกษุ สามเณร แม่ชี อาชีพรหัส11
+    public static function checkMonkFrontNameWithJob(ISOnline $row){
+
+        $check_prename = ['พ.ภ.','พระ' , 'ชี' , 'เณร'];
+        $check_occu = 11;
+
+        $prename = $row->prename;
+        $OCCU = (int) $row->OCCU;
+
+        foreach ($check_prename as $checkPrename){
+            if (strpos($checkPrename, $prename) !== false) {
+                if($OCCU != $check_occu){
+                    // คำหน้าหน้า อาชีพเป็น หทาย แต่ อาชีพไม่ใช้ทหาร
+                    return true;
+                }
+            }
+        }
+
+        return false;
+
+    }
+
+
 
     public static function checkDriverAge(ISOnline $row){
 
         return false;
     }
+
+
+    public static function isContainArray($check, $arrayWord){
+
+        foreach ($arrayWord as $word){
+            if (strpos(strtolower($word) , strtolower($check) ) !== false) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
