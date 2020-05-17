@@ -12,10 +12,33 @@ class ISController extends Controller
         return view("page.home");
     }
 
+
+    public function contact(){
+        return view("page.contact");
+    }
+
+
+    public function check_error(){
+        return view("page.check_error");
+    }
+
+    public function check_duplicate(){
+        return view("page.check_duplicate");
+    }
+
+
+
     public function testConnection(Request $request){
 
-        $isData = ISOnline::limit("10")->get();
-        dd($isData);
+       // $isData = ISOnline::limit("100")->get();
+      //  dd($isData);
+
+        $isData = ISOnline::limit("100")->get();
+
+        foreach ($isData as $row) {
+            echo $row->name;
+            echo '<br>';
+        }
     }
 
     public function checkData(Request $request, $month, $year){
@@ -41,8 +64,10 @@ class ISController extends Controller
         }
 
         foreach ($preNames as $key => $count) {
-            echo  $key. " : " . $count . "<br>";
-        }
+          echo  $key. " : " . $count . "<br>";
+      }
+
+       // return view('page.check_test', compact('preNames'));
     }
 
 
@@ -56,13 +81,16 @@ class ISController extends Controller
 
         //  ตรวจสอบ คำหน้าหน้า อาชีพเป็น หทาย ตำรวจ แต่ อาชีพไม่ใช้หทาย ตำรวจ
         if (self::checkSoldierPolishFrontNameWithJob($row)){
-            echo $row->id . " ". $row->prename. " ". $row->sex. " : error คำหน้าหน้า อาชีพเป็น หทาย ตำรวจ แต่ อาชีพไม่ใช้หทาย ตำรวจ <br>";
+            echo $row->id . " ". $row->prename. " ". $row->sex. " : error คำหน้าหน้า อาชีพเป็น หทาย ตำรวจ แต่ อาชีพไม่ใช้ทหาร ตำรวจ <br>";
         }
 
         //   ตรวจสอบ คำหน้าหน้า พระภิกษุ สามเณร แม่ชี อาชีพรหัส11
         if (self::checkMonkFrontNameWithJob($row)){
             echo $row->id . " ". $row->prename. " ". $row->sex. " : error  คำหน้าหน้า พระภิกษุ สามเณร แม่ชี อาชีพรหัส 11 <br>";
         }
+
+
+
 
     }
 
@@ -136,7 +164,7 @@ class ISController extends Controller
         foreach ($check_prename as $checkPrename){
             if (strpos($checkPrename, $prename) !== false) {
                 if($OCCU != $check_occu){
-                    // คำหน้าหน้า อาชีพเป็น หทาย แต่ อาชีพไม่ใช้ทหาร
+                    // คำหน้าหน้า อาชีพเป็น ทหาร แต่ อาชีพไม่ใช้ทหาร
                     return true;
                 }
             }

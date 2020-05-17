@@ -1,18 +1,11 @@
-<style>
-    .footer-main{
 
-        background-color: gray;
-       position: absolute;
-        bottom: 0;left: 0;
-    }
-</style>
-
-<div class="container-fluid footer-main">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                This is sample Footer
-            </div>
+<div class="footer">
+    <div class="footer-inner">
+        <div class="footer-content">
+						<span class="bigger-120">
+							<span class="blue bolder">IS Check</span> <br>
+						<p>BureauofEpidemiology (DOE) x Division of Injury Prevention (DIP) @ DDC,MOPH</p>
+						</span>
         </div>
     </div>
 </div>

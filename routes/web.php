@@ -14,8 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('', "ISController@index");
+Route::get('home', "ISController@index");
+Route::get('contact', "ISController@contact");
 
+Route::get('check_error', "ISController@check_error");
+Route::get('check_duplicate', "ISController@check_duplicate");
 
 Route::get('isdata', "ISController@testConnection");
 Route::get('checkData/{month}/{year}', "ISController@checkData");
+
+
+
+
+
 
