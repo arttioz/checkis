@@ -22,7 +22,8 @@
 <h2> ติดต่อสอบถามข้อมูลเพิ่มเติมได้ที่ <br> กองป้องกันการบาดเจ็บ กรมควบคุมโรค</h2>
 
 
-          <h3>     Email : rtimoph@gmail.com <br>
+          <h3>     Email : teaminjury@gmail.com
+              <br>
                Line Group community ISWIN : (QR Code)
                 </h3>
 
@@ -31,5 +32,11 @@
 
 
         </div>
+
+
+
     </div>
+
+
+    <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>   <BR>
 @endsection

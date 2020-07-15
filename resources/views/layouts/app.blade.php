@@ -1,21 +1,43 @@
 <!doctype html>
 <html>
 <head>
+
     @include('includes.head')
+
 </head>
-<body class="skin-1">
+<body class="no-skin" onload="myHide();">
 
     @include('includes.header')
 
-    <div class="main-container ace-save-state" id="main-container">
+{{--    <div class="main-container ace-save-state" id="main-container">
 
-<div class="main-content">
+<div class="main-content">--}}
+
+    <div class="main-content">
+        <div class="main-content-inner">
+
+
     <div class="page-content">
+
+        <div id="hidepage2" style="display:block;" align="center" width="100%">
+            <br>
+            <IMG SRC="{{ asset('assets/images/loading.gif') }}" WIDTH="100" HEIGHT="100" BORDER="0" ALT=""><br>
+            กรุณารอสักครู่...
+        </div>
+
+        <div id="hidepage" style="display:none;">
+            <table>
+                <tr><td></td></tr>
+            </table>
+        </div>
+
 
 
         @yield('content')
 
-
+        <footer>
+            @include('includes.footer')
+        </footer>
 
     </div><!-- /.page-content -->
 
@@ -23,9 +45,9 @@
 
 
 
-<footer>
-    @include('includes.footer')
-</footer>
+
+
+    </div>
 
     </div>
 
@@ -82,6 +104,11 @@
     <!-- ace scripts -->
     <script src="{{ URL::asset('assets/js/ace-elements.min.js')}}"></script>
     <script src="{{ URL::asset('assets/js/ace.min.js')}}"></script>
+
+    <script>
+        $('.chosen').chosen();
+
+    </script>
 
 </body>
 </html>
