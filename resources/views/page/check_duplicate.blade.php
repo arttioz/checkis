@@ -78,7 +78,7 @@ elseif ($m_w=='12') {echo 'ธันวาคม';}
                             <label for="">โรงพยาบาล</label>
                             <select class="chosen form-control" name="hosp" id="hosp" required >
                                 <option value="">---กรุณาเลือก---</option>
-                                <option value="ALL" {{ @$hosp_id == 'ALL' ? "selected" : "" }}>ทุกโรงพยาบาล(Admin)</option>
+{{--                                <option value="ALL" {{ @$hosp_id == 'ALL' ? "selected" : "" }}>ทุกโรงพยาบาล(Admin)</option>--}}
                                 @foreach($hospData as $hosp)
                                     <option value="{{$hosp->off_id ?? ""}}"   {{ $hosp->off_id == @$hosp_id ? "selected" : "" }}>
                                         {{$hosp->off_id ?? ""}} {{$hosp->name ?? ""}}</option>

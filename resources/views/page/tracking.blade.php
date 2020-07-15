@@ -45,7 +45,7 @@
                                 <th> โรงพยาบาล</th>
                                 <th> จังหวัด</th>
                                 <th> ส่งข้อมูลล่าสุดเมื่อ</th>
-                                <th> รายละเอียด</th>
+                                <th> วัน</th>
                             </tr>
                             </thead>
                             <tbody class="table-striped">
@@ -54,20 +54,21 @@
                                 <tr>
                                     <td> {{ $loop->iteration }}</td>
                                     <td>{{ $item->hosp ?? "" }}</td>
-
-                                    <td> {{ $item->inp_src ?? "" }} | {{ $item->inp_id ?? "" }}
-                                        | {{ $item->prename ?? "" }}  </td>
+                                    <td>{{ $item->hospname ?? "" }}</td>
+{{--                                    <td> {{ $item->inp_src ?? "" }} | {{ $item->inp_id ?? "" }}--}}
+{{--                                        | {{ $item->prename ?? "" }}  </td>--}}
                                     <td> {{ $item->changwat ?? "" }}   </td>
                                     <td> {{ $item->hosp_last_update ?? "" }}   </td>
                                     <td>
-                                        @auth()
-                                            <a href="{{url('tracking_detail/'.$item->hosp.'/'.date('Y'))}}"
-                                               target="_blank">
-                                                <button class="btn btn-white btn-info btn-bold">
-                                                    <i class="ace-icon fa fa-search bigger-120 blue"></i>
-                                                </button>
-                                            </a>
-                                        @endauth
+                                        {{ $item->dif ?? "" }}
+{{--                                        @auth()--}}
+{{--                                            <a href="{{url('tracking_detail/'.$item->hosp.'/'.date('Y'))}}"--}}
+{{--                                               target="_blank">--}}
+{{--                                                <button class="btn btn-white btn-info btn-bold">--}}
+{{--                                                    <i class="ace-icon fa fa-search bigger-120 blue"></i>--}}
+{{--                                                </button>--}}
+{{--                                            </a>--}}
+{{--                                        @endauth--}}
 
                                     </td>
                                 </tr>

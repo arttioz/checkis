@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\IS\ISOnline;
 use App\Models\IS\Lib_hospcode;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ISController extends Controller
 {
@@ -36,13 +38,37 @@ class ISController extends Controller
         $hospUseIS = [10660,10661,10662,10663];
         // รายชื่อโรงพยาบาล
 
-        $hospData = ISOnline::limit(100)
-        ->orderBy('hosp_last_update', 'desc')
+        $hospData = ISOnline::
+        orderBy('hosp_last_update', 'desc')
             ->groupBy('hosp','inp_src')
             ->where('inp_src','ISWIN_V3')
+            ->whereYear('lastupdate',2020)
             ->get(['hosp','inp_src', ISOnline::raw('MAX(lastupdate) as hosp_last_update')]);
-        //dd($hospData);
+
+
+        $hospsData = $this->getHospNameArr();
+        $now = Carbon::now();
+        foreach ($hospData as $row){
+            $row->hospname = $hospsData[$row->hosp]->name;
+            $row->changwat = $hospsData[$row->hosp]->changwat;
+            $dateReport = Carbon::parse($row->hosp_last_update);
+            $row->dif =  $dateReport->diffInDays($now);
+        }
+
+
+//
+//        dd($hospData);
         return view("page.tracking",compact('hospData'));
+    }
+
+    public function getHospNameArr(){
+        $hosps = Lib_hospcode::get();
+        $hospsData = [];
+        foreach ($hosps as $row){
+            $hospsData[$row->off_id] = $row;
+
+        }
+        return $hospsData;
     }
 
     public function tracking_detail($hospcode,$year){
@@ -61,8 +87,15 @@ class ISController extends Controller
 
 
     public function check_error(){
-// query Hosp
-        $hospData = Lib_hospcode::where('off_id', 'like', '1%')->get();
+
+        $user = Auth::user();
+
+        if ($user->type == 4){
+            $hospData = Lib_hospcode::where('off_id', $user->hospcode)->get();
+        }else{
+            $hospData = Lib_hospcode::where('off_id', 'like', '1%')->get();
+        }
+        
         return view("page.check_error",compact('hospData'));
     }
 
@@ -376,7 +409,14 @@ class ISController extends Controller
 
     public function check_duplicate(){
         // query Hosp
-        $hospData = Lib_hospcode::where('off_id', 'like', '1%')->get();
+        $user = Auth::user();
+
+        if ($user->type == 4){
+            $hospData = Lib_hospcode::where('off_id', $user->hospcode)->get();
+        }else{
+            $hospData = Lib_hospcode::where('off_id', 'like', '1%')->get();
+        }
+        
         return view("page.check_duplicate",compact('hospData'));
     }
 

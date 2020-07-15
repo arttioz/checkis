@@ -88,7 +88,7 @@ elseif (@$mm=='ALL') {echo 'ทุกเดือน';}
                             <label for="">โรงพยาบาล</label>
                             <select class="chosen form-control" name="hosp" id="hosp" required >
                                <option value="">---กรุณาเลือก---</option>
-                                <option value="ALL" {{ @$hosp_id == 'ALL' ? "selected" : "" }}>ทุกโรงพยาบาล(Admin)</option>
+{{--                                <option value="ALL" {{ @$hosp_id == 'ALL' ? "selected" : "" }}>ทุกโรงพยาบาล(Admin)</option>--}}
                                 @foreach($hospData as $hosp)
                                     <option value="{{$hosp->off_id ?? ""}}"   {{ $hosp->off_id == @$hosp_id ? "selected" : "" }}>
                                        {{$hosp->off_id ?? ""}} {{$hosp->name ?? ""}}</option>
@@ -143,139 +143,137 @@ elseif (@$mm=='ALL') {echo 'ทุกเดือน';}
 
         <hr>
             {{--Start Error 27 list--}}
-            <div class="col-sm-12">
-                <h3 class="row header   lighter blue">
-                    <span class="col-xs-12">   27 List (From IS Checking MS Access) <small>เมื่อทุกรายการ ok จะนำมาใส่ส่วนนี้</small> </span><!-- /.col -->
-                </h3>
+{{--            <div class="col-sm-12">--}}
+{{--                <h3 class="row header   lighter blue">--}}
+{{--                    <span class="col-xs-12">   27 List (From IS Checking MS Access) <small>เมื่อทุกรายการ ok จะนำมาใส่ส่วนนี้</small> </span><!-- /.col -->--}}
+{{--                </h3>--}}
 
-                <div id="accordion" class="accordion-style1">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-
-
-                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#3-1" aria-expanded="false">
-                                    <i class="bigger-110 ace-icon fa fa-angle-right" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
-                                    &nbsp; 01-บันทึก เวลาที่เกิดเหตุ (Atime) และ เวลาที่มาถึง รพ. (Htime) ทุกราย
+{{--                <div id="accordion" class="accordion-style1">--}}
+{{--                    <div class="panel panel-default">--}}
+{{--                        <div class="panel-heading">--}}
+{{--                            <h4 class="panel-title">--}}
 
 
-                                </a>
-                                <span class="badge badge-danger" style="float: right;background-color: red;">{{count($is_List1)}}</span>
-                            </h4>
+{{--                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#3-1" aria-expanded="false">--}}
+{{--                                    <i class="bigger-110 ace-icon fa fa-angle-right" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>--}}
+{{--                                    &nbsp; 01-บันทึก เวลาที่เกิดเหตุ (Atime) และ เวลาที่มาถึง รพ. (Htime) ทุกราย--}}
 
 
-                        </div>
-
-                        <div class="panel-collapse collapse" id="3-1" aria-expanded="false" style="height: 0px;">
-                            <div class="panel-body">
-                                {{-- List 1--}}
-                                <div class="row table-row">
-                                    <div class="col-12">
-                                        <div class="clearfix">
+{{--                                </a>--}}
+{{--                                <span class="badge badge-danger" style="float: right;background-color: red;">{{count($is_List1)}}</span>--}}
+{{--                            </h4>--}}
 
 
-                                            <div class="pull-right tableTools-container"></div>
-                                        </div>
+{{--                        </div>--}}
 
-                                        <table class="table table-main table-bordered display" id="dynamic-table" >
-                                            <thead>
-
-                                            <tr>
-                                                <th> # </th>
-                                                <th> รหัสสถานพยาบาล </th>
-                                                <th> โรงพยาบาล </th>
-                                                <th> HN </th>
-                                                <th> ชื่อ-สกุล </th>
-                                                <th>วันที่เกิดเหตุ</th>
-                                                <th>เวลาที่เกิดเหตุ</th>
-                                                <th>วันที่มาถึง</th>
-                                                <th>เวลาที่มาถึง</th>
-                                                <th> lastupdate </th>
-                                                <th> Action </th>
-                                            </tr>
-                                            </thead>
-                                            <tbody class="table-striped">
-
-                                            @foreach($is_List1 as $item)
-                                                <tr>
-                                                    <td> {{ $loop->iteration }}</td>
-                                                    <td>{{ $item->hosp ?? "" }}</td>
-                                                    <td> {{ $hosp_name->name ?? "" }}   </td>
-                                                    <td> {{ $item->hn ?? "" }}  </td>
-                                                    <td> {{ $item->prename ?? "" }} {{ $item->name ?? "" }} {{ $item->fname ?? "" }}  </td>
-                                                    <td> {{ $item->adate ?? "" }}  </td>
-                                                    <td> {{ $item->atime ?? "" }}  </td>
-                                                    <td> {{ $item->hdate ?? "" }}  </td>
-                                                    <td> {{ $item->htime ?? "" }}  </td>
-                                                    <td> {{ $item->lastupdate ?? "" }}  </td>
-                                                    <td> </td>
+{{--                        <div class="panel-collapse collapse" id="3-1" aria-expanded="false" style="height: 0px;">--}}
+{{--                            <div class="panel-body">--}}
+{{--                                --}}{{-- List 1--}}
+{{--                                <div class="row table-row">--}}
+{{--                                    <div class="col-12">--}}
+{{--                                        <div class="clearfix">--}}
 
 
-                                                </tr>
+{{--                                            <div class="pull-right tableTools-container"></div>--}}
+{{--                                        </div>--}}
 
-                                            @endforeach
+{{--                                        <table class="table table-main table-bordered display" id="dynamic-table" >--}}
+{{--                                            <thead>--}}
 
+{{--                                            <tr>--}}
+{{--                                                <th> # </th>--}}
+{{--                                                <th> รหัสสถานพยาบาล </th>--}}
+{{--                                                <th> โรงพยาบาล </th>--}}
+{{--                                                <th> HN </th>--}}
+{{--                                                <th> ชื่อ-สกุล </th>--}}
+{{--                                                <th>วันที่เกิดเหตุ</th>--}}
+{{--                                                <th>เวลาที่เกิดเหตุ</th>--}}
+{{--                                                <th>วันที่มาถึง</th>--}}
+{{--                                                <th>เวลาที่มาถึง</th>--}}
+{{--                                                <th> lastupdate </th>--}}
+{{--                                                <th> Action </th>--}}
+{{--                                            </tr>--}}
+{{--                                            </thead>--}}
+{{--                                            <tbody class="table-striped">--}}
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
-                                <hr>
-
-                                {{-- List 1--}}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#3-2" aria-expanded="false">
-                                    <i class="bigger-110 ace-icon fa fa-angle-right" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
-                                    02-อุบัติเหตุขนส่ง  การบาดเจ็บ (Injby) ต้องไม่มีรหัส  2 - ทำร้ายตนเอง  3 – ผู้อื่นทำร้าย
-                                </a>
-                                <span class="badge badge-danger" style="float: right;background-color: red;">{{count($is_List2)}}</span>
-                            </h4>
-                        </div>
-
-                        <div class="panel-collapse collapse" id="3-2" aria-expanded="true" style="">
-                            <div class="panel-body">
-                               NA
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#3-3" aria-expanded="false">
-                                    <i class="bigger-110 ace-icon fa fa-angle-right" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
-                                    03-เด็กอายุ < 5 ปี ไม่ควรทำร้ายตนเอง (Injby = 2)
-                                </a>
-                                <span class="badge badge-danger" style="float: right;background-color: red;">{{count($is_List3)}}</span>
-                            </h4>
-                        </div>
-
-                        <div class="panel-collapse collapse" id="3-3" aria-expanded="false" style="height: 0px;">
-                            <div class="panel-body">
-                               NA
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{--End Error 27 list--}}
+{{--                                            @foreach($is_List1 as $item)--}}
+{{--                                                <tr>--}}
+{{--                                                    <td> {{ $loop->iteration }}</td>--}}
+{{--                                                    <td>{{ $item->hosp ?? "" }}</td>--}}
+{{--                                                    <td> {{ $hosp_name->name ?? "" }}   </td>--}}
+{{--                                                    <td> {{ $item->hn ?? "" }}  </td>--}}
+{{--                                                    <td> {{ $item->prename ?? "" }} {{ $item->name ?? "" }} {{ $item->fname ?? "" }}  </td>--}}
+{{--                                                    <td> {{ $item->adate ?? "" }}  </td>--}}
+{{--                                                    <td> {{ $item->atime ?? "" }}  </td>--}}
+{{--                                                    <td> {{ $item->hdate ?? "" }}  </td>--}}
+{{--                                                    <td> {{ $item->htime ?? "" }}  </td>--}}
+{{--                                                    <td> {{ $item->lastupdate ?? "" }}  </td>--}}
+{{--                                                    <td> </td>--}}
 
 
-<br><br><br>
+{{--                                                </tr>--}}
+
+{{--                                            @endforeach--}}
+
+
+{{--                                            </tbody>--}}
+{{--                                        </table>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+
+{{--                                <hr>--}}
+
+{{--                                --}}{{-- List 1--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                    <div class="panel panel-default">--}}
+{{--                        <div class="panel-heading">--}}
+{{--                            <h4 class="panel-title">--}}
+{{--                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#3-2" aria-expanded="false">--}}
+{{--                                    <i class="bigger-110 ace-icon fa fa-angle-right" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>--}}
+{{--                                    02-อุบัติเหตุขนส่ง  การบาดเจ็บ (Injby) ต้องไม่มีรหัส  2 - ทำร้ายตนเอง  3 – ผู้อื่นทำร้าย--}}
+{{--                                </a>--}}
+{{--                                <span class="badge badge-danger" style="float: right;background-color: red;">{{count($is_List2)}}</span>--}}
+{{--                            </h4>--}}
+{{--                        </div>--}}
+
+{{--                        <div class="panel-collapse collapse" id="3-2" aria-expanded="true" style="">--}}
+{{--                            <div class="panel-body">--}}
+{{--                               NA--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                    <div class="panel panel-default">--}}
+{{--                        <div class="panel-heading">--}}
+{{--                            <h4 class="panel-title">--}}
+{{--                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#3-3" aria-expanded="false">--}}
+{{--                                    <i class="bigger-110 ace-icon fa fa-angle-right" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>--}}
+{{--                                    03-เด็กอายุ < 5 ปี ไม่ควรทำร้ายตนเอง (Injby = 2)--}}
+{{--                                </a>--}}
+{{--                                <span class="badge badge-danger" style="float: right;background-color: red;">{{count($is_List3)}}</span>--}}
+{{--                            </h4>--}}
+{{--                        </div>--}}
+
+{{--                        <div class="panel-collapse collapse" id="3-3" aria-expanded="false" style="height: 0px;">--}}
+{{--                            <div class="panel-body">--}}
+{{--                               NA--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            --}}{{--End Error 27 list--}}
+
+
+{{--<br><br><br>--}}
 
 <hr>
 
-
-
-
-            <h3 class="center">--- 27 List--- <small>เมื่อเสร็จแล้วจะนำไปใส่ใน bullet ด้านบน</small> </h3>
+        
+{{--            <h3 class="center">--- 27 List--- <small>เมื่อเสร็จแล้วจะนำไปใส่ใน bullet ด้านบน</small> </h3>--}}
 
             {{-- List 1--}}
             <div class="row table-row">
@@ -1935,7 +1933,7 @@ elseif (@$mm=='ALL') {echo 'ทุกเดือน';}
                     .DataTable( {
                         bAutoWidth: false,
                         aaSorting: [],
-                        "paging": false
+                        "paging": true
                     } );
 
 

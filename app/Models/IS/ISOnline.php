@@ -13,6 +13,10 @@ class ISOnline extends Model
 
 
 
+    public function hosp()
+    {
+        return $this->hasOne(Lib_hospcode::class, 'off_id' , 'hosp');
+    }
 
 
 

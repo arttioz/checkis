@@ -227,7 +227,7 @@
         <li class="hover {{ Request::is('tracking*') ? 'active open' : '' }}">
             <a href="{{url('tracking')}}">
                 <i class="menu-icon fa fa-exchange"></i>
-                <span class="menu-text"> ติดตามข้อมูล </span>
+                <span class="menu-text"> ติดตามข้อมูล IS-WIN </span>
             </a>
 
             <b class="arrow"></b>
@@ -257,6 +257,9 @@
             <br>
         </li>
 
+
+        @if(isset($_GET["center"]))
+
         <li class=" center">
             <a > <span class="menu-text bolder">----IS DIP----</span>
             </a>
@@ -280,7 +283,6 @@
 
             <b class="arrow"></b>
         </li>
-
 
 
 
@@ -331,6 +333,8 @@
         <li >
             <br>
         </li>
+
+        @endif
 
         @auth()
 
