@@ -88,14 +88,10 @@ class ISController extends Controller
 
     public function check_error(){
 
-        $user = Auth::user();
 
-        if ($user->type == 4){
-            $hospData = Lib_hospcode::where('off_id', $user->hospcode)->get();
-        }else{
-            $hospData = Lib_hospcode::where('off_id', 'like', '1%')->get();
-        }
-        
+        $level = ["A","S","M1"];
+        $hospData = Lib_hospcode::whereIn('level_performance', $level)->get();
+
         return view("page.check_error",compact('hospData'));
     }
 
@@ -409,14 +405,9 @@ class ISController extends Controller
 
     public function check_duplicate(){
         // query Hosp
-        $user = Auth::user();
+        $level = ["A","S","M1"];
+        $hospData = Lib_hospcode::whereIn('level_performance', $level)->get();
 
-        if ($user->type == 4){
-            $hospData = Lib_hospcode::where('off_id', $user->hospcode)->get();
-        }else{
-            $hospData = Lib_hospcode::where('off_id', 'like', '1%')->get();
-        }
-        
         return view("page.check_duplicate",compact('hospData'));
     }
 

@@ -26,12 +26,12 @@ Auth::routes();
 
 Route::get('tracking_detail/{hospcode}/{year}', "ISController@tracking_detail")->middleware('auth');
 
-Route::get('check_error', "ISController@check_error")->middleware('auth');
-Route::post('check_error/process', 'ISController@check_error_process')->name('check_error_process')->middleware('auth');
+Route::get('check_error', "ISController@check_error");
+Route::post('check_error/process', 'ISController@check_error_process')->name('check_error_process');
 
 
-Route::get('check_duplicate', "ISController@check_duplicate")->middleware('auth');
-Route::post('check_duplicate/process', 'ISController@check_duplicate_process')->name('check_duplicate_process')->middleware('auth');
+Route::get('check_duplicate', "ISController@check_duplicate");
+Route::post('check_duplicate/process', 'ISController@check_duplicate_process')->name('check_duplicate_process');
 
 Route::resource('user', 'UserController')->middleware('auth');
 
